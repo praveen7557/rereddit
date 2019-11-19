@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>Search Icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homepage" transform="translate(-201.000000, -102.000000)" fill="#E4E5EC" fill-rule="nonzero">
+            <g id="sidebar" transform="translate(-1.000000, 0.000000)">
+                <g id="Search" transform="translate(0.000000, 90.000000)">
+                    <path d="M217.707,25.293 L215,22.586 C215.63,21.536 216,20.311 216,19 C216,15.14 212.859,12 209,12 C205.141,12 202,15.14 202,19 C202,22.86 205.141,26 209,26 C210.312,26 211.536,25.631 212.586,25 L215.293,27.707 C215.488,27.902 215.744,28 216,28 C216.256,28 216.512,27.902 216.707,27.707 L217.707,26.707 C218.098,26.316 218.098,25.684 217.707,25.293 Z M209,24 C206.239,24 204,21.761 204,19 C204,16.239 206.239,14 209,14 C211.761,14 214,16.239 214,19 C214,21.761 211.761,24 209,24 Z" id="Search-Icon"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
