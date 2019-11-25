@@ -1,8 +1,10 @@
 <template>
   <div class="sidebar">
-    <div class="logo-container">
-      <div class="logo" />
-    </div>
+    <nuxt-link to="/">
+      <div class="logo-container">
+        <div class="logo" />
+      </div>
+    </nuxt-link>
     <div class="search-container">
       <input type="text" class="search" />
       <div class="search-icon" />

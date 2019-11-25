@@ -16,15 +16,16 @@ export default {
   computed: {
     ...mapState("subreddits", ["posts"])
   },
-  async fetch({ store, route }) {
-    store.commit("UPDATE_TYPES", "r-subreddit");
-    await store.dispatch("subreddits/GET_POSTS", route.params.subreddit);
+  // async fetch({ store, route }) {
+  //   store.commit("UPDATE_TYPES", "r-subreddit");
+  //   await store.dispatch("subreddits/GET_POSTS", route.params.subreddit);
+  // },
+  async mounted() {
+    this.$store.commit("UPDATE_TYPES", "r-subreddit");
+    await this.$store.dispatch(
+      "subreddits/GET_POSTS",
+      this.$route.params.subreddit
+    );
   }
-  // async mounted() {
-  //   await this.$store.dispatch(
-  //     "subreddits/GET_POSTS",
-  //     this.$route.params.subreddit
-  //   );
-  // }
 };
 </script>

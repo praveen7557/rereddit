@@ -3,12 +3,14 @@ export default function ({ $axios, store }) {
   $axios.onRequest((config) => {
     if (store.state.auth.access_token) {
       config.headers.common.authorization = "bearer " + store.state.auth.access_token;
+    } else if (config.url.indexOf("json") === -1) {
+      config.url = config.url.replace("reddit/", "reddit_auth/") + ".json";
     }
   })
 
   $axios.onError(async (err) => {
     const authStore = store.state.auth;
-    if (err.response.status === 401) {
+    if (err.response && err.response.status === 401) {
       store.commit("auth/GET_ACCESS_TOKEN", null)
       const refreshToken = authStore.refresh_token;
       // if (process.client) {
