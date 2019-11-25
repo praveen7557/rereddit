@@ -1,18 +1,29 @@
 <template>
   <div class="sidebar">
     <div class="logo-container">
-      <div class="logo"></div>
+      <div class="logo" />
     </div>
     <div class="search-container">
       <input type="text" class="search" />
-      <div class="search-icon"></div>
+      <div class="search-icon" />
     </div>
     <div class="feeds-container">
-      <div class="feed-item" v-for="item in feeds" :key="item.key">{{item.name}}</div>
+      <nuxt-link
+        :to="{name:item.routeName,params:{subreddit:item.route}}"
+        v-for="(item, index) in feeds"
+        :key="index"
+        class="feed-item"
+      >{{item.name}}</nuxt-link>
+      <!-- <div v-for="item in feeds" :key="item.key" class="feed-item">{{ item.name }}</div> -->
     </div>
-    <div class="separator"></div>
+    <div class="separator" />
     <div class="feeds-container subreddits">
-      <div class="feed-item" v-for="(item,idx) in subs" :key="idx">{{item.name}}</div>
+      <nuxt-link
+        :to="`/${item.reddit}`"
+        v-for="(item,idx) in subs"
+        :key="idx"
+        class="feed-item"
+      >{{ item.name }}</nuxt-link>
     </div>
   </div>
 </template>
@@ -23,13 +34,13 @@ import { feeds } from "~/helpers/feeds.js";
 
 export default {
   name: "Sidebar",
-  computed: {
-    ...mapState(["subs"])
-  },
   data() {
     return {
       feeds
     };
+  },
+  computed: {
+    ...mapState(["subs"])
   },
   mounted() {
     try {
@@ -107,6 +118,16 @@ export default {
     color: #898ea2;
 
     .selected {
+      color: #fd4500;
+    }
+  }
+
+  .feed-item {
+    color: #898ea2;
+    display: block;
+    text-decoration: none;
+
+    &.nuxt-link-exact-active {
       color: #fd4500;
     }
   }

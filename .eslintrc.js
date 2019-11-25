@@ -13,11 +13,12 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    'semi': ["warn", "never"],
-    'quotes': ["warn", "double"],
+    'semi': ["off", "never"],
+    'quotes': ["off", "double"],
     'eol-last': ["off", "never"],
     'no-console': ["off", "never"],
     'arrow-parens': ["off", "never"],
     'brace-style': ["off", "never"],
+    'indent': ["off", "never"]
   }
 }

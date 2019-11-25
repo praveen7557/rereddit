@@ -1,7 +1,12 @@
 <template>
   <nav class="navbar">
     <div class="types">
-      <div class="type" v-for="(item, index) in types" :key="index">{{item.name}}</div>
+      <nuxt-link
+        :to="getNuxtLinkTo(item)"
+        v-for="(item, index) in navTypes"
+        :key="index"
+        class="type"
+      >{{item.name}}</nuxt-link>
     </div>
     <div class="account">
       <a class="login" v-if="!isAuthenticated" :href="loginUrl">Login</a>
@@ -12,7 +17,6 @@
 
 <script>
 import { mapState, mapGetters, mapMutations } from "vuex";
-import { types } from "../helpers/types";
 
 export default {
   computed: {
@@ -20,15 +24,23 @@ export default {
       return process.env.REDDIT_LOGIN_URL;
     },
     ...mapGetters("auth", ["isAuthenticated"]),
-    ...mapState("auth", ["user"])
-  },
-  data() {
-    return {
-      types
-    };
+    ...mapState("auth", ["user"]),
+    ...mapState(["navTypes"])
   },
   methods: {
-    ...mapMutations("auth", ["LOGOUT"])
+    ...mapMutations("auth", ["LOGOUT"]),
+    getNuxtLinkTo(item) {
+      const params = {
+        type: item.route
+      };
+      if (this.$route.name.indexOf("r-subreddit") > -1) {
+        params.subreddit = this.$route.params.subreddit;
+      }
+      return {
+        name: item.routeName,
+        params
+      };
+    }
   }
 };
 </script>
@@ -38,7 +50,10 @@ export default {
   display: flex;
   justify-content: space-between;
   position: sticky;
-  top: 20px;
+  top: 0;
+  height: 70px;
+  padding: 20px 50px;
+  background-color: #f8f8f8;
 
   .types {
     display: flex;
@@ -52,6 +67,13 @@ export default {
       letter-spacing: normal;
       color: #464855;
       margin-right: 30px;
+      text-decoration: none;
+
+      &.nuxt-link-exact-active {
+        color: #fd4500;
+        opacity: 1;
+        border-bottom: 1px solid #fd4500;
+      }
     }
   }
 

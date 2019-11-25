@@ -1,13 +1,12 @@
 export default {
   GET_ACCESS_TOKEN({ commit }, data) {
     try {
-      this.$api(commit, {
+      return this.$api(commit, {
         url: "/reddit_auth/api/v1/access_token",
         method: "POST",
         data,
         headers: {
-          Authorization: process.env.BASIC_AUTH,
-          "Content-Type": "application/x-www-form-urlencoded"
+          Authorization: process.env.BASIC_AUTH
         }
       }, "GET_ACCESS_TOKEN").then(res => {
         this.$api(commit, {

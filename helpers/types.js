@@ -1,26 +1,31 @@
 export const types = [{
   key: 1,
   name: "Hot",
-  api: "",
-  route: ""
+  api: "best",
+  route: "",
+  routeName: "index"
 }, {
   key: 2,
   name: "New",
   api: "new",
-  route: "new"
+  route: "new",
+  routeName: "type"
 }, {
   key: 3,
   name: "Top",
   api: "top",
-  route: "top"
+  route: "top",
+  routeName: "type"
 }, {
   key: 4,
   name: "Controversial",
   api: "controversial",
-  route: "controversial"
+  route: "controversial",
+  routeName: "type"
 }, {
   key: 5,
   name: "Rising",
   api: "rising",
-  route: "rising"
+  route: "rising",
+  routeName: "type"
 }]
