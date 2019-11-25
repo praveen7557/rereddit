@@ -1,8 +1,12 @@
 export default {
-  GET_POSTS({ commit }, subreddit) {
+  GET_POSTS({ state, commit }, subreddit) {
     try {
+      let url = `/reddit/r/${subreddit}`;
+      if (state.next) {
+        url = url + `?after=${state.next}`;
+      }
       return this.$api(commit, {
-        url: `/reddit/r/${subreddit}`,
+        url,
         method: "GET"
       }, "GET_POSTS")
     } catch (ex) {

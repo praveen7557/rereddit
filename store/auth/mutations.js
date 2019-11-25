@@ -12,7 +12,7 @@ export default ({
       }
     } else {
       // Cookie.remove('access_token')
-      Cookie.remove('user');
+      // Cookie.remove('user');
       state.access_token = null;
     }
   },

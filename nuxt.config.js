@@ -30,7 +30,8 @@ export default {
   */
   plugins: [
     '~/plugins/axios',
-    '~/plugins/api'
+    '~/plugins/api',
+    '~/plugins/directives'
   ],
   /*
   ** Nuxt.js modules

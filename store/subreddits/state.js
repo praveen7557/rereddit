@@ -1,5 +1,6 @@
 export default () => {
   return {
-    posts: []
+    posts: [],
+    next: null
   }
 }

@@ -58,7 +58,8 @@ export default {
         this.post.thumbnail !== "nsfw" &&
         this.post.thumbnail !== "image" &&
         this.post.thumbnail !== "default" &&
-        this.post.thumbnail !== "spoiler"
+        this.post.thumbnail !== "spoiler" &&
+        this.post.thumbnail !== ""
       );
     },
     postedTo() {

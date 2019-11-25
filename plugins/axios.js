@@ -13,13 +13,6 @@ export default function ({ $axios, store }) {
     if (err.response && err.response.status === 401) {
       store.commit("auth/GET_ACCESS_TOKEN", null)
       const refreshToken = authStore.refresh_token;
-      // if (process.client) {
-      //   refreshToken = Cookie.get("refresh_token");
-      // } else {
-      //   const parsed = cookieparser.parse(err.config.headers.cookie);
-      //   refreshToken = parsed.refresh_token;
-      // }
-
       if (!authStore.isRefreshing) {
         store.commit("auth/CHANGE_REFRESH_STATUS", true);
         // const formData = new FormData();

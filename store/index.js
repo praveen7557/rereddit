@@ -4,7 +4,8 @@ const cookieparser = process.server ? require('cookieparser') : undefined
 export const state = () => ({
   subs: [],
   navTypes: types,
-  posts: []
+  posts: [],
+  next: null
 })
 
 export const actions = {
@@ -18,7 +19,7 @@ export const actions = {
     }, "GET_SUBREDDITS")
   },
 
-  GET_POSTS({ commit, getters }, obj) {
+  GET_POSTS({ state, commit, getters }, obj) {
     const { type, isAuth } = obj;
     let url = `/reddit_auth/${type}.json`;
     let headers = {
@@ -27,6 +28,9 @@ export const actions = {
     if (getters["auth/isAuthenticated"] && isAuth) {
       url = `/reddit/${type}`;
       headers = {};
+    }
+    if (state.next) {
+      url = url + `?after=${state.next}`;
     }
     return this.$api(commit, {
       url,
@@ -68,8 +72,17 @@ export const mutations = {
 
   GET_POSTS(state, res) {
     if (res) {
-      state.posts = res.data.children.map(e => e.data);
+      if (state.next) {
+        state.posts = [...state.posts, ...res.data.children.map(e => e.data)];
+      } else {
+        state.posts = res.data.children.map(e => e.data);
+      }
+      state.next = res.data.after;
     }
+  },
+
+  REMOVE_NEXT(state) {
+    state.next = null;
   },
 
   UPDATE_TYPES(state, routeName) {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Listing :posts="posts" />
+    <Listing v-infinite-scroll="loadMore" :infinite-disabled="loading" :posts="posts" />
   </div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
     ...mapState(["posts"])
   },
   async fetch({ store }) {
+    store.commit("REMOVE_NEXT");
     store.commit("UPDATE_TYPES", "");
     await store.dispatch("GET_POSTS", {
       isAuth: true,
@@ -30,16 +31,27 @@ export default {
     // });
     if (this.$route.query.code) {
       try {
-        // const formData = new FormData();
-        // formData.append("code", this.$route.query.code);
-        // formData.append("redirect_uri", process.env.REDIRECT_URI);
-        // formData.append("grant_type", "authorization_code");
         await this.$store.dispatch("auth/GET_ACCESS_TOKEN", {
           code: this.$route.query.code,
           redirect_uri: process.env.REDIRECT_URI,
           grant_type: "authorization_code"
         });
       } catch (ex) {}
+    }
+  },
+  data() {
+    return {
+      loading: false
+    };
+  },
+  methods: {
+    async loadMore() {
+      this.loading = true;
+      await this.$store.dispatch("GET_POSTS", {
+        isAuth: true,
+        type: "best"
+      });
+      this.loading = false;
     }
   }
 };
